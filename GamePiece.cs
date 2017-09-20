@@ -46,10 +46,10 @@ namespace SnakeGame
 
         private void PrepareExplosion()
         {
-            for(int i = 0; i < 10; i++)
+            for(int i = 0; i < 35; i++)
             {
                 explosionMaterial.Add(
-                    new Rectangle(me.Location, new Size(4, 4)));
+                    new Rectangle(me.Location, new Size(rnd.Next(1, 4), rnd.Next(1, 4))));
             }
         }
 
