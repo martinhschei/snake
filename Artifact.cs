@@ -24,6 +24,11 @@ namespace SnakeGame
             points = rnd.Next(1, 10);
         }
 
+        public int GetArtifactPoints()
+        {
+            return points;
+        }
+
         public bool HasBeenHit()
         {
             return hasBeenHit;

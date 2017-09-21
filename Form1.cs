@@ -27,6 +27,8 @@ namespace SnakeGame
             Artifact a = new Artifact(rnd.Next(0, ClientRectangle.Width), rnd.Next(0, ClientRectangle.Height));
             artifacts.Add(a);
 
+            snake.OnNewScore += Snake_OnNewScore;
+
             /*
             // create 10 artifacts per obstacle
             int artPerObs = 10;
@@ -50,10 +52,17 @@ namespace SnakeGame
             */
         }
 
+        private void Snake_OnNewScore(int points)
+        {
+           
+            Text = ("Snake - the game - " + points + " points");
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
             DoubleBuffered = true;
             GamePlay.Enabled = true;
+            Explosions.Enabled = true;
         }
 
         private void GamePlay_Tick(object sender, EventArgs e)
@@ -81,11 +90,14 @@ namespace SnakeGame
                     }
                     else if (a.HasBeenHit() == true)
                     {
+                        /*
                         if (!a.isExploding && a.explosionDone == false)
                         {
+                            Console.WriteLine("Here");
                             e.Graphics.FillRectangle(Brushes.Lavender, a.GetRectangle());
                         }
-                        else if (a.isExploding)
+                        */
+                        if (a.isExploding)
                         {
                             e.Graphics.FillRectangles(Snake.GetRandomBrush(), a.GetExplosionMaterial());
                         }
@@ -114,8 +126,13 @@ namespace SnakeGame
             if(a != null)
             {
                 a.Hit();
-                snake.GrowBody(a.points);
 
+                for(int i = 0; i < a.GetArtifactPoints(); i++)
+                {
+                    snake.GrowBody();
+                }
+
+                Snake_OnNewScore(snake.GetPoints());
                 Artifact newA = new Artifact(rnd.Next(0, ClientRectangle.Width), rnd.Next(0, ClientRectangle.Height));
                 artifacts.Add(newA);
             }

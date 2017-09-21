@@ -24,6 +24,9 @@ namespace SnakeGame
         public delegate void HeadDirectionChange(Shift s);
         public event HeadDirectionChange OnHeadDirectionChange;
 
+        public delegate void NewScore(int i);
+        public event NewScore OnNewScore;
+
         public enum Directions { UP, DOWN, LEFT, RIGHT };
 
         public Directions currentDirection, lastDirection;
@@ -78,9 +81,17 @@ namespace SnakeGame
             {
                 body.Pop();
             }
+
+            OnNewScore(GetPoints());
+
         }
 
-        public void GrowBody(int points)
+        public int GetPoints()
+        {
+            return body.Count();
+        }
+
+        public void GrowBody()
         {
             SnakeBodyPart sbp = new SnakeBodyPart();
             Rectangle snakeHead = GetSnakeHead();
@@ -111,6 +122,7 @@ namespace SnakeGame
 
             OnHeadDirectionChange += sbp.NewDirection;
             body.Push(sbp);
+
         }
 
         private Point AddBodyPart_Left(int BodyPartCount, int BodyPartWidth)

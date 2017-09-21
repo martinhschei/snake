@@ -27,6 +27,7 @@ namespace SnakeGame
 
         public SnakeBodyPart()
         {
+
         }
 
         public Brush GetBrush()

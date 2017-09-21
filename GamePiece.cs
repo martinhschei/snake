@@ -16,7 +16,7 @@ namespace SnakeGame
         public bool explosionDone = false;
         private int explotionDuration = 15;
         private int explotionLoops = 0;
-
+        private int explotionParticles = 35;
 
         public GamePiece()
         {
@@ -44,15 +44,6 @@ namespace SnakeGame
             return me.IntersectsWith(gp.GetRectangle());
         }
 
-        private void PrepareExplosion()
-        {
-            for(int i = 0; i < 35; i++)
-            {
-                explosionMaterial.Add(
-                    new Rectangle(me.Location, new Size(rnd.Next(1, 4), rnd.Next(1, 4))));
-            }
-        }
-
         public void StartExplosion()
         {
             PrepareExplosion();
@@ -64,6 +55,15 @@ namespace SnakeGame
                     new Point(
                         me.Location.X,me.Location.Y),
                         explosionMaterial[i].Size);
+            }
+        }
+
+        private void PrepareExplosion()
+        {
+            for (int i = 0; i < explotionParticles; i++)
+            {
+                explosionMaterial.Add(
+                    new Rectangle(me.Location, new Size(rnd.Next(1, 4), rnd.Next(1, 4))));
             }
         }
 
