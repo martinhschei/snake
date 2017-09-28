@@ -32,12 +32,11 @@ namespace SnakeGame
         public Directions currentDirection, lastDirection;
 
         private int moveMomemtum = 1;
-        private int sleepFactor = 20;
-        private Thread mover;
         private Point StartPoint;
         private Stack<SnakeBodyPart> body;
         private SnakeHead head;
-        public bool GameOn;
+
+        private bool _gameOn { get; set;}
 
         public int BodyPartWidth = 10;
 
@@ -51,7 +50,13 @@ namespace SnakeGame
             lastDirection = Directions.RIGHT;
 
             StartPoint = new Point(25, 450);
-            GameOn = true;
+            _gameOn = true;
+        }
+
+        public bool GameOn
+        {
+            get { return _gameOn;  }
+            set { _gameOn = value;  }
         }
 
         public static Brush GetRandomBrush()

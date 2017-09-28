@@ -20,14 +20,12 @@ namespace SnakeGame
         public Form1()
         {
             InitializeComponent();
-            snake = new Snake();
+
             rnd = new Random();
-            int amountObs = rnd.Next(2, 10);
 
-            Artifact a = new Artifact(rnd.Next(0, ClientRectangle.Width), rnd.Next(0, ClientRectangle.Height));
-            artifacts.Add(a);
-
-            snake.OnNewScore += Snake_OnNewScore;
+            CreateArtifacts();
+            CreateSnake();
+            
 
             /*
             // create 10 artifacts per obstacle
@@ -52,9 +50,21 @@ namespace SnakeGame
             */
         }
 
+        private void CreateArtifacts()
+        {
+            Artifact a = new Artifact(rnd.Next(0, ClientRectangle.Width), rnd.Next(0, ClientRectangle.Height));
+            artifacts.Add(a);
+        }
+
+        private void CreateSnake()
+        {
+            snake = new Snake();
+            snake.OnNewScore += Snake_OnNewScore;
+            Text = ("Snake - the game - 0 points");
+        }
+
         private void Snake_OnNewScore(int points)
         {
-           
             Text = ("Snake - the game - " + points + " points");
         }
 
@@ -108,6 +118,23 @@ namespace SnakeGame
 
                 snake.MoveEverything();
             }
+            else
+            {
+                GamePlay.Enabled = false;
+                Explosions.Enabled = false;
+
+                if(MessageBox.Show("Play again?", "Game over", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    CreateSnake();
+                    GamePlay.Enabled = true;
+                    Explosions.Enabled = true;
+                }
+                else
+                {
+                    Close();
+                }
+               
+            }
 
         }
 
@@ -115,11 +142,12 @@ namespace SnakeGame
         {
             if(snake.GetSnakeHead().X >= Width || snake.GetSnakeHead().X < 0)
             {
-                Console.WriteLine("Collision side");
+                snake.GameOn = false;
             }
+
             else if(snake.GetSnakeHead().Y >= Height || snake.GetSnakeHead().Y < 0)
             {
-                Console.WriteLine("Collision top/bottom");
+                snake.GameOn = false;
             }
 
             Artifact a = artifacts.SingleOrDefault(ar => ar.HasBeenHit() == false && ar.GetRectangle().IntersectsWith(snake.GetSnakeHead()));
