@@ -46,3 +46,12 @@ C:\Users\146784\Downloads\snake-master\snake-master\obj\Debug\SnakeGame.csprojRe
 C:\Users\146784\Downloads\snake-master\snake-master\obj\Debug\SnakeGame.Form1.resources
 C:\Users\146784\Downloads\snake-master\snake-master\obj\Debug\Snake.Properties.Resources.resources
 C:\Users\146784\Downloads\snake-master\snake-master\obj\Debug\SnakeGame.csproj.GenerateResource.Cache
+C:\Users\martin.schei\code\snake\bin\Debug\Snake.exe.config
+C:\Users\martin.schei\code\snake\bin\Debug\Snake.exe
+C:\Users\martin.schei\code\snake\bin\Debug\Snake.pdb
+C:\Users\martin.schei\code\snake\obj\Debug\SnakeGame.Form1.resources
+C:\Users\martin.schei\code\snake\obj\Debug\Snake.Properties.Resources.resources
+C:\Users\martin.schei\code\snake\obj\Debug\SnakeGame.csproj.GenerateResource.cache
+C:\Users\martin.schei\code\snake\obj\Debug\SnakeGame.csproj.CoreCompileInputs.cache
+C:\Users\martin.schei\code\snake\obj\Debug\Snake.exe
+C:\Users\martin.schei\code\snake\obj\Debug\Snake.pdb

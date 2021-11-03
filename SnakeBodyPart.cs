@@ -9,13 +9,11 @@ namespace SnakeGame
 {
     public class SnakeBodyPart
     {
-        private Size defaultSize = new Size(10, 10);
         private Brush defaultBrush;
         private Rectangle bodyPart;
-        private Snake.Directions myDirection;
-       
-        // use a Queue to handle the shifts of direction in a First In First Out manner
         private Queue<Shift> nextShifts;
+        private Snake.Directions myDirection;
+        private Size defaultSize = new Size(10, 10);
 
         public SnakeBodyPart(Point p, Snake.Directions dir)
         {
@@ -39,8 +37,7 @@ namespace SnakeGame
         {
             return bodyPart;
         }
-
-        // observes event in SnakeHead
+        
         public void NewDirection(Shift s)
         {
             nextShifts.Enqueue(s);

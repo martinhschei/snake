@@ -25,29 +25,6 @@ namespace SnakeGame
 
             CreateArtifacts();
             CreateSnake();
-            
-
-            /*
-            // create 10 artifacts per obstacle
-            int artPerObs = 10;
-            Obstacle o;
-            Artifact a;
-            for (int i = 0; i < amountObs; i++)
-            {
-                o = new Obstacle(rnd.Next(0, ClientRectangle.Width), rnd.Next(0, ClientRectangle.Height));
-                obstacles.Add(o);
-
-                for (int j = 0; j < artPerObs; j++)
-                {
-                    do
-                    {
-                        a = new Artifact(rnd.Next(0, ClientRectangle.Width), rnd.Next(0, ClientRectangle.Height));
-                    } while (Collides(a.GetRectangle(), o.GetRectangle()));
-
-                    
-                }
-            }
-            */
         }
 
         private void CreateArtifacts()
@@ -151,6 +128,7 @@ namespace SnakeGame
             }
 
             Artifact a = artifacts.SingleOrDefault(ar => ar.HasBeenHit() == false && ar.GetRectangle().IntersectsWith(snake.GetSnakeHead()));
+
             if(a != null)
             {
                 a.Hit();
@@ -165,7 +143,6 @@ namespace SnakeGame
                 artifacts.Add(newA);
             }
             
-
             snake.GetSnakeBody().ToList().ForEach(bodyPart =>
             {
                 if ((snake.GetSnakeHead().IntersectsWith(bodyPart.GetRectangle()) && (bodyPart != snake.GetSnakeBody().ToList().Last())))
@@ -174,7 +151,6 @@ namespace SnakeGame
                 }
 
             });
-
         }
 
         private void Explosions_Tick(object sender, EventArgs e)

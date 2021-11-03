@@ -10,13 +10,13 @@ namespace SnakeGame
         protected Random rnd;
         protected Rectangle me;
         protected Brush myBrush;
-
-        protected List<Rectangle> explosionMaterial;
+            
         public bool isExploding;
+        private int explotionLoops = 0;
         public bool explosionDone = false;
         private int explotionDuration = 15;
-        private int explotionLoops = 0;
         private int explotionParticles = 35;
+        protected List<Rectangle> explosionMaterial;
 
         public GamePiece()
         {
@@ -72,6 +72,7 @@ namespace SnakeGame
             if (isExploding)
             {
                 explotionLoops++;
+
                 if (explotionLoops > explotionDuration)
                 {
                     isExploding = false;

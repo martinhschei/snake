@@ -7,19 +7,16 @@ using System.Threading.Tasks;
 
 namespace SnakeGame
 {
-
     class SnakeHead
     {
-        private Brush defaultBrush = Brushes.Yellow;
         private Rectangle head;
-
+        private Brush defaultBrush = Brushes.Yellow;
+        
         public SnakeHead()
         {
-            head = new Rectangle(
-                new Point(50, 75), new Size(10, 10)
-            );
+            head = new Rectangle(new Point(50, 75), new Size(10, 10));
         }
-
+            
         public Rectangle GetHeadRectangle()
         {
             return head;

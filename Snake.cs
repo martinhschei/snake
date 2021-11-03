@@ -1,40 +1,29 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Threading;
+using System.Drawing;
+using System.Collections.Generic;
 
 namespace SnakeGame
 {
     public class Snake
     {
-
-        // can be extended with more brushes to allow a multicolored snake
         private static Brush[] brushes = new Brush[] {
-          
             Brushes.Red,
             Brushes.Yellow,
             Brushes.WhiteSmoke,
             Brushes.PaleVioletRed
+        };
 
-            };
-
+        private SnakeHead head;
+        private Point StartPoint;
+        private int moveMomemtum = 1;
+        private Stack<SnakeBodyPart> body;
+        public event NewScore OnNewScore;
+        public delegate void NewScore(int i);
+        public enum Directions { UP, DOWN, LEFT, RIGHT };
+        public Directions currentDirection, lastDirection;
         public delegate void HeadDirectionChange(Shift s);
         public event HeadDirectionChange OnHeadDirectionChange;
-
-        public delegate void NewScore(int i);
-        public event NewScore OnNewScore;
-
-        public enum Directions { UP, DOWN, LEFT, RIGHT };
-
-        public Directions currentDirection, lastDirection;
-
-        private int moveMomemtum = 1;
-        private Point StartPoint;
-        private Stack<SnakeBodyPart> body;
-        private SnakeHead head;
 
         private bool _gameOn { get; set;}
 
@@ -42,10 +31,9 @@ namespace SnakeGame
 
         public Snake()
         {
-            // use a Stack so we can pop() the last added body part(s) when player hits an Obstacle
             body = new Stack<SnakeBodyPart>();
             head = new SnakeHead();
-
+            
             currentDirection = Directions.RIGHT;
             lastDirection = Directions.RIGHT;
 
@@ -86,9 +74,8 @@ namespace SnakeGame
             {
                 body.Pop();
             }
-
+                
             OnNewScore(GetPoints());
-
         }
 
         public int GetPoints()
@@ -185,53 +172,7 @@ namespace SnakeGame
                     GetSnakeHead().X, GetSnakeHead().Y - BodyPartWidth);
             }
         }
-
-        /*
-        public void StartMoving()
-        {
-            mover = new Thread(MoveLoop);
-            mover.Start();
-        }
         
-        private void MoveLoop()
-        {
-            while(true)
-            {
-                // needed because otherwise it runs too fast!
-                Thread.Sleep(sleepFactor);
-
-                switch (currentDirection)
-                {
-                    case (Directions.UP):
-                        {
-                            head.MoveInDirection(currentDirection, moveMomemtum);
-                            body.ToList().ForEach(b => b.Move(moveMomemtum));
-                            break;
-                        }
-                    case (Directions.DOWN):
-                        {
-                            head.MoveInDirection(currentDirection, moveMomemtum);
-                            body.ToList().ForEach(b => b.Move(moveMomemtum));
-                            break;
-                        }
-                    case (Directions.LEFT):
-                        {
-                            head.MoveInDirection(currentDirection, moveMomemtum);
-                            body.ToList().ForEach(b => b.Move(moveMomemtum));
-                            break;
-                        }
-                    case (Directions.RIGHT):
-                        {
-                            head.MoveInDirection(currentDirection, moveMomemtum);
-                            body.ToList().ForEach(b => b.Move(moveMomemtum));
-                            break;
-                        }
-                }
-            }
-        }
-
-        */
-
         public void MoveEverything()
         {
             switch (currentDirection)

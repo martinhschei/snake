@@ -9,9 +9,9 @@ namespace SnakeGame
 {
     class Artifact : GamePiece 
     {
+        public int points;
         private int myPoints;
         private bool hasBeenHit;
-        public int points;
 
         public Artifact(int x, int y)
         {
